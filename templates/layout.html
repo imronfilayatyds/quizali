@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% if title %}
+        <title>QuizAli - {{ title }}</title>
+    {% else %}
+        <title>QuizAli</title>
+    {% endif %}
+</head>
+<body>
+
+    <!-- bagian header -->
+    <header>
+      <nav>
+          <div class="navbar-container">
+                <div class="logo">
+                    <a href="#" class="brand-logo">QuizAli</a>
+                </div>
+                <div class="menu-burger">
+                    <button id="hamburger" name="hamburger" type="button" class="hamburger">
+                        <span class="bun-1"></span>
+                        <span class="bun-2"></span>
+                        <span class="bun-3"></span>
+                    </button>
+                    <div id="nav-menu" class="nav-menu nav-hidden">
+                        <ul class="nav-links" id="nav-links">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Take Quiz</a></li>
+                            <li><a href="#">Results</a></li>
+                            <li><a href="#">Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+          </div>
+      </nav>
+  </header>
+    
+  <main class="content-container">
+    <section class="main-content">
+        {% block content %}
+        {% endblock %}
+    </section>
+
+    <aside class="weather-widget">
+        <h2>How's weather today?</h2>
+        <div class="mini-widget">
+            <iframe src="https://www.meteoblue.com/en/weather/widget/daily?geoloc=detect&days=4&tempunit=CELSIUS&windunit=KILOMETER_PER_HOUR&precipunit=MILLIMETER&coloured=coloured&pictoicon=1&maxtemperature=1&mintemperature=1&windspeed=1&windgust=0&winddirection=1&uv=0&humidity=0&precipitation=1&precipitationprobability=1&spot=1&pressure=0&layout=light"  frameborder="0" scrolling="NO" allowtransparency="true" sandbox="allow-same-origin allow-scripts allow-popups allow-popups-to-escape-sandbox" style="width: 216px; height: 420px"></iframe><div><!-- DO NOT REMOVE THIS LINK -->Source: <a href="https://www.meteoblue.com/en/weather/week/index?utm_source=daily_widget&utm_medium=linkus&utm_content=daily&utm_campaign=Weather%2BWidget" target="_blank" rel="noopener">meteoblue</a></div>
+        </div>
+    </aside>
+  </main>
+
+    <footer>
+        <p>Assembled by Ali Imron</p>
+    </footer>
+    
+    <script src="../static/js/script.js"></script>
+</body>
+</html>
