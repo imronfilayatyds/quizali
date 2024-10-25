@@ -27,10 +27,15 @@
                     </button>
                     <div id="nav-menu" class="nav-menu nav-hidden">
                         <ul class="nav-links" id="nav-links">
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">Take Quiz</a></li>
-                            <li><a href="#">Results</a></li>
-                            <li><a href="#">Logout</a></li>
+                            {% if 'user_id' in session %}
+                                <li><a href="{{ url_for('home') }}">Home</a></li>
+                                <li><a href="{{ url_for('quiz') }}">Take Quiz</a></li>
+                                <li><a href="{{ url_for('display_rank') }}">Results</a></li>
+                                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                            {% else %}
+                                <li><a href="{{ url_for('login') }}">Login</a></li>
+                                <li><a href="{{ url_for('register') }}">Register</a></li>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>
@@ -40,6 +45,18 @@
     
   <main class="content-container">
     <section class="main-content">
+        {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            <ul class="flash-messages">
+            {% for category, message in messages %}
+                <li class="alert {{ category }}">
+                    {{ message }}
+                    <span class="close-btn">&times;</span>
+                </li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
         {% block content %}
         {% endblock %}
     </section>

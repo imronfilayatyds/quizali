@@ -22,6 +22,9 @@ class User(db.Model):
 # Route homepage
 @app.route("/")
 def home():
+    if 'user_id' not in session:
+        flash('You need to log in first.', 'error')
+        return redirect(url_for('login'))
     return render_template("index.html", title="Home")
 
 @app.route("/quiz")
@@ -66,8 +69,12 @@ def register():
     
     return render_template("register.html", title="Register")
 
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login():
+    if 'user_id' in session:
+        flash('You are already logged in.', 'info')
+        return redirect(url_for('home'))
+    
     if request.method == 'POST':
         email = request.form['email']
         password = request.form['password']
@@ -87,4 +94,6 @@ def login():
 
 @app.route("/logout")
 def logout():
-    return render_template("index.html")
+    session.pop('user_id', None)  # Remove user_id from session
+    flash('You have been logged out.', 'success')
+    return redirect(url_for('login'))

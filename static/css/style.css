@@ -205,8 +205,9 @@ footer {
 .form-wrapper {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh; 
+  align-items: flex-start;
+  height: 100%;
+  margin-bottom: 0.5rem;
 }
 
 .form-ctr {
