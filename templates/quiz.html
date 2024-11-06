@@ -2,25 +2,36 @@
 {% block content %}
 
 <section class="main-content">
-    <h2>Quiz</h2>
-  <div class="quiz-question">
-    <p>1. Ini adalah soal pertama...</p>
-    <ul class="options">
-      <li><button>A. pd.read_scv('/content/data.csv')</button></li>
-      <li><button>B. pd.read_scv('/content/data.csv')</button></li>
-      <li><button>C. rd.pead_scv('/content/data.csv')</button></li>
-      <li><button>D. df.read_scv('/content/data.csv')</button></li>
-    </ul>
-  </div>
-  <div class="quiz-question">
-    <p>2. Bagaimana cara menggerakan turtle...</p>
-    <ul class="options">
-      <li><button>A. t.fd(50) then t.left(60)</button></li>
-      <li><button>B. t.fd(50) then t.rt(100)</button></li>
-      <li><button>C. t.fd(50) then t.left(60) then t.bk(100)</button></li>
-      <li><button>D. t.fd(50) then t.rgt(60)</button></li>
-    </ul>
-  </div>
+  <h1>Take the Quiz</h1>
+  <form method="POST" action="{{ url_for('quiz') }}">
+      {% for question in questions %}
+          <div class="question-block">
+              <p>{{ question['question'] }}</p>
+              <div class="answer-options-group">
+                  <div class="answer-option">
+                      <input type="radio" id="{{ question.index }}_0" name="{{ question.index }}" value="{{ question['choices'][0] }}" >
+                      <label for="{{ question.index }}_0">{{ question['choices'][0] }}</label>
+                  </div>
+                  <div class="answer-option">
+                      <input type="radio" id="{{ question.index }}_1" name="{{ question.index }}" value="{{ question['choices'][1] }}" >
+                      <label for="{{ question.index }}_1">{{ question['choices'][1] }}</label>
+                  </div>
+                  <div class="answer-option">
+                      <input type="radio" id="{{ question.index }}_2" name="{{ question.index }}" value="{{ question['choices'][2] }}" >
+                      <label for="{{ question.index }}_2">{{ question['choices'][2] }}</label>
+                  </div>
+                  <div class="answer-option">
+                      <input type="radio" id="{{ question.index }}_3" name="{{ question.index }}" value="{{ question['choices'][3] }}" >
+                      <label for="{{ question.index }}_3">{{ question['choices'][3] }}</label>
+                  </div>
+              </div>
+          </div>
+      {% endfor %}
+      <button type="submit">Submit</button>
+      {% if error %}
+          <p style="color: red">{{ error }}</p>
+      {% endif %}
+  </form>
 </section>
 
 {% endblock content %}

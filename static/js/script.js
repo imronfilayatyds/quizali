@@ -27,3 +27,46 @@ closeBtns.forEach(function(button) {
     button.parentElement.style.display = 'none';
   });
 });
+
+// const radioButtons = document.querySelectorAll('input[type="radio"]');
+
+// radioButtons.forEach(radioButton => {
+//   radioButton.addEventListener('change', () => {
+//     const questionBlock = radioButton.closest('.question-block');
+//     questionBlock.classList.remove('error');
+//   });
+// });
+
+// function validateForm() {
+//   let isValid = true;
+//   radioButtons.forEach(radioButton => {
+//     const questionBlock = radioButton.closest('.question-block');
+//     if (!radioButton.checked) {
+//       questionBlock.classList.add('error');
+//       isValid = false;
+//     }
+//   });
+//   return isValid;
+// }
+
+// const form = document.querySelector('form')
+// form.addEventListener('submit', (event) => {
+//   if (!validateForm()) {
+//     event.preventDefault();
+//   }
+// });
+
+function selectOption(questionIndex, selectedChoiceIndex) {
+  // Get all choices for the current question
+  const options = document.querySelectorAll(`[name="question_${questionIndex}"]`);
+
+  // Remove the 'selected' class from all labels for this question
+  options.forEach(option => {
+      const label = document.querySelector(`label[for="${option.id}"]`);
+      label.classList.remove('selected');
+  });
+
+  // Add the 'selected' class to the label of the selected option
+  const selectedLabel = document.querySelector(`label[for="option_${questionIndex}_${selectedChoiceIndex}"]`);
+  selectedLabel.classList.add('selected');
+}

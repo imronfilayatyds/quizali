@@ -1,0 +1,17 @@
+[
+    {
+        "question": "Apa ibukota Jawa Timur?",
+        "choices": ["Semarang", "Yogyakarta", "Surabaya", "Jakarta"],
+        "answer": "Surabaya"
+    },
+    {
+        "question": "Siapa presiden pertama Indonesia?",
+        "choices": ["Soekarno", "BJ Habibie", "Gusdur", "M. Yamin"],
+        "answer": "Soekarno"
+    },
+    {
+        "question": "Apa jenis penulisan seperti ini: variabelBaru?",
+        "choices": ["camelCase", "PascalCase", "lowercase", "coolcase"],
+        "answer": "camelCase"
+    }
+]

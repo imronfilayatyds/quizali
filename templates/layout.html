@@ -30,7 +30,7 @@
                             {% if 'user_id' in session %}
                                 <li><a href="{{ url_for('home') }}">Home</a></li>
                                 <li><a href="{{ url_for('quiz') }}">Take Quiz</a></li>
-                                <li><a href="{{ url_for('display_rank') }}">Results</a></li>
+                                <li><a href="{{ url_for('display_rank') }}">Rank</a></li>
                                 <li><a href="{{ url_for('logout') }}">Logout</a></li>
                             {% else %}
                                 <li><a href="{{ url_for('login') }}">Login</a></li>

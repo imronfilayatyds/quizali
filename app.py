@@ -1,3 +1,4 @@
+import json
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -19,6 +20,14 @@ class User(db.Model):
     def __repr__(self):
         return f'<User {self.username}>'
 
+class QuizResult(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    score = db.Column(db.Integer, nullable=False)
+    timestamp = db.Column(db.DateTime, default=db.func.now())
+
+    user = db.relationship('User', backref=db.backref('quiz_results', lazy=True))
+
 # Route homepage
 @app.route("/")
 def home():
@@ -27,13 +36,51 @@ def home():
         return redirect(url_for('login'))
     return render_template("index.html", title="Home")
 
-@app.route("/quiz")
+@app.route("/quiz", methods=['GET', 'POST'])
 def quiz():
-    return render_template("quiz.html", title="Quiz")
+    if 'user_id' not in session:
+        flash('You need to log in first.', 'error')
+        return redirect(url_for('login'))
+
+    if request.method == 'POST':
+        # Calculate score based on user responses
+        user_answers = request.form.to_dict()
+        score = 0
+
+        # Load questions
+        with open('questions.json') as f:
+            questions = json.load(f)
+
+        # Check each question's answer
+        for question_index, user_answer in user_answers.items():
+            if user_answer == questions[int(question_index)]['answer']:
+                score += 1
+
+        # Store the result in the database
+        result = QuizResult(user_id=session['user_id'], score=score)
+        db.session.add(result)
+        db.session.commit()
+
+        flash(f'Your score is {score}!', 'success')
+        return redirect(url_for('display_rank'))
+
+    # Load questions and add indexed choices
+    with open('questions.json') as f:
+        questions = json.load(f)
+        for i, question in enumerate(questions):
+            question['index'] = i  # Add an index key
+            question['choices_with_index'] = list(enumerate(question['choices']))
+
+    return render_template("quiz.html", questions=questions, title="Quiz")
 
 @app.route("/rank")
 def display_rank():
-    return render_template("rank.html", title="Rank")
+    if 'user_id' not in session:
+        flash('You need to log in first.', 'error')
+        return redirect(url_for('login'))
+
+    leaderboard = db.session.query(User.username, QuizResult.score).join(QuizResult).order_by(QuizResult.score.desc()).all()
+    return render_template("rank.html", leaderboard=leaderboard, title="Rank")
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -81,9 +128,11 @@ def login():
         
         user = User.query.filter_by(email=email).first()
         if not user:
-            flash('Email not found', 'error')
+            flash('Email not found. Daftar dulu', 'error')
+            return redirect(url_for('login'))
         elif not check_password_hash(user.password, password):
             flash('Incorrect password, coba lagi', 'error')
+            return redirect(url_for('login'))
         else:
             session['user_id'] = user.id
             flash('Login successful', 'success')
