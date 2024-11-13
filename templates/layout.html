@@ -27,8 +27,8 @@
                     </button>
                     <div id="nav-menu" class="nav-menu nav-hidden">
                         <ul class="nav-links" id="nav-links">
+                            <li><a href="{{ url_for('home') }}">Home</a></li>
                             {% if 'user_id' in session %}
-                                <li><a href="{{ url_for('home') }}">Home</a></li>
                                 <li><a href="{{ url_for('quiz') }}">Take Quiz</a></li>
                                 <li><a href="{{ url_for('display_rank') }}">Rank</a></li>
                                 <li><a href="{{ url_for('logout') }}">Logout</a></li>

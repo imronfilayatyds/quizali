@@ -1,12 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
-
-<section class="main-content">
-  <h1>Take the Quiz</h1>
+  <h1 class="content-title">Take the Quiz</h1>
   <form method="POST" action="{{ url_for('quiz') }}">
       {% for question in questions %}
           <div class="question-block">
-              <p>{{ question['question'] }}</p>
+              <p>{{ question['question']|replace('\n', '<br>')|safe }}</p>
               <div class="answer-options-group">
                   <div class="answer-option">
                       <input type="radio" id="{{ question.index }}_0" name="{{ question.index }}" value="{{ question['choices'][0] }}" >
@@ -27,11 +25,10 @@
               </div>
           </div>
       {% endfor %}
-      <button type="submit">Submit</button>
+      <button type="submit" class="submit-quiz">Submit</button>
       {% if error %}
           <p style="color: red">{{ error }}</p>
       {% endif %}
   </form>
-</section>
 
 {% endblock content %}

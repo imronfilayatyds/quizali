@@ -135,6 +135,8 @@ nav {
   list-style: none;
   display: block; 
   flex-direction: column;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 
 .nav-links li {
@@ -172,6 +174,7 @@ nav {
 }
 
 .weather-widget {
+  height: fit-content;
   margin-top: 1rem;
   border: 1px solid rgba(0, 0, 0, 0.1); 
   border-radius: 0.5rem;
@@ -182,6 +185,21 @@ nav {
 
 .content-title {
   text-align: center;
+  color: #c96868;
+  margin-bottom: 20px;
+}
+
+.home-message {
+  width: 80%;
+  /* background-color: #fff4ea; */
+  padding: 20px;
+  margin: 0 auto;
+  border-radius: 0.5rem;
+}
+
+.home-message a {
+  text-decoration: none;
+  color: #7eacb5;
 }
 
 /* Footer */
@@ -301,6 +319,15 @@ footer {
   color: #999;
 }
 
+.after-button {
+  margin-top: 1.5rem;
+}
+
+.link-after-button {
+  text-decoration: none;
+  font-weight: bold;
+}
+
 /* for quiz */
 .question-block {
   margin-bottom: 20px;
@@ -313,16 +340,6 @@ footer {
 .question-block p {
   margin-bottom: 10px;
 }
-
-/* .answer-options-group {
-  display: flex;
-  border: 1px solid #007AFF;
-  border-radius: 8px;
-  overflow: hidden;
-  width: 100%;
-  max-width: 400px;
-  margin: 10px 0;
-} */
 
 .answer-option {
   display: flex;
@@ -344,11 +361,9 @@ footer {
 .answer-option label {
     display: block;
     padding: 8px 16px;
-    text-align: center;
-    color: #007AFF;
     transition: all 0.2s ease;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 1rem;
 }
 
 .answer-option label:hover {
@@ -359,6 +374,19 @@ footer {
   background-color: #d0e6f7;
   color: #0056b3;
   font-weight: bold;
+}
+
+button.submit-quiz {
+  background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button.submit-quiz:hover {
+  background-color: #0062cc;
 }
 
 @media (min-width: 768px) {

@@ -31,9 +31,9 @@ class QuizResult(db.Model):
 # Route homepage
 @app.route("/")
 def home():
-    if 'user_id' not in session:
-        flash('You need to log in first.', 'error')
-        return redirect(url_for('login'))
+    # if 'user_id' not in session:
+    #     flash('You need to log in first.', 'error')
+    #     return redirect(url_for('login'))
     return render_template("index.html", title="Home")
 
 @app.route("/quiz", methods=['GET', 'POST'])
@@ -53,7 +53,7 @@ def quiz():
 
         # Check each question's answer
         for question_index, user_answer in user_answers.items():
-            if user_answer == questions[int(question_index)]['answer']:
+            if questions[int(question_index)]['choices'].index(user_answer) == questions[int(question_index)]['answer']:
                 score += 1
 
         # Store the result in the database

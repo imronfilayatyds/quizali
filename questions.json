@@ -1,17 +1,96 @@
 [
     {
-        "question": "Apa ibukota Jawa Timur?",
-        "choices": ["Semarang", "Yogyakarta", "Surabaya", "Jakarta"],
-        "answer": "Surabaya"
+        "question": "Apa itu kecerdasan buatan (Artificial Intelligence)?",
+        "choices": [
+            "Program yang digunakan untuk bermain musik", 
+            "Kemampuan komputer untuk melakukan tugas yang biasanya membutuhkan kecerdasan manusia",
+            "Perangkat keras untuk menyimpan data", 
+            "Bahasa pemrograman untuk membuat animasi"],
+        "answer": 1
     },
     {
-        "question": "Siapa presiden pertama Indonesia?",
-        "choices": ["Soekarno", "BJ Habibie", "Gusdur", "M. Yamin"],
-        "answer": "Soekarno"
+        "question": "Perintah apa dalam Python yang digunakan untuk menampilkan output ke layar?",
+        "choices": [
+            "output()",
+            "show()",
+            "print()",
+            "display()"],
+        "answer": 2
     },
     {
-        "question": "Apa jenis penulisan seperti ini: variabelBaru?",
-        "choices": ["camelCase", "PascalCase", "lowercase", "coolcase"],
-        "answer": "camelCase"
+        "question": "Library Python yang paling umum digunakan untuk pengembangan model AI adalah...",
+        "choices": [
+            "numpy", 
+            "pandas",
+            "sklearn",
+            "random"],
+        "answer": 2
+    },
+    {
+        "question": "Apa fungsi dari library numpy dalam pemrograman Python?",
+        "choices": [
+            "Membantu dalam mengolah data gambar", 
+            "Membuat grafik dan diagram",
+            "Memproses data numerik dan array",
+            "Menyimpan data dalam bentuk tabel"],
+        "answer": 2
+    },
+    {
+        "question": "Di bawah ini adalah contoh kode untuk mengimpor library yang umum digunakan dalam AI. Library apa yang diimpor?\n\nimport tensorflow as tf",
+        "choices": [
+            "numpy", 
+            "pandas",
+            "scipy",
+            "tensorflow"],
+        "answer": 3
+    },
+    {
+        "question": "Library Python yang sering digunakan untuk melatih model AI sederhana adalah...",
+        "choices": [
+            "matplotlib",
+            "keras",
+            "csv",
+            "os"],
+        "answer": 1
+    },
+    {
+        "question": "Apa tujuan dari fit() pada model AI di Python?",
+        "choices": [
+            "Menampilkan hasil prediksi",
+            "Memvisualisasikan data",
+            "Melatih model dengan data yang diberikan",
+            "Menghapus data yang tidak relevan"
+        ],
+        "answer": 2
+    },
+    {
+        "question": "Jika kamu ingin membuat array dengan angka acak dalam Python, library mana yang sering digunakan?",
+        "choices": [
+            "random",
+            "math",
+            "plotly",
+            "csv"
+        ],
+        "answer": 0
+    },
+    {
+        "question": "Apa fungsi dari metode predict() dalam model kecerdasan buatan?",
+        "choices": [
+            "Melatih model",
+            "Mempersiapkan data",
+            "Menyimpan model",
+            "Menghasilkan prediksi berdasarkan data yang diberikan"
+        ],
+        "answer": 3
+    },
+    {
+        "question": "Mana yang benar tentang algoritma 'supervised learning'?",
+        "choices": [
+            "Model belajar dari data tanpa label",
+            "Model belajar dari data dengan label yang diberikan",
+            "Model digunakan untuk memvisualisasikan data",
+            "Model hanya digunakan untuk mengelompokkan data"
+        ],
+        "answer": 1
     }
 ]
