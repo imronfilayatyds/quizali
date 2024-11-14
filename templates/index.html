@@ -1,16 +1,38 @@
 {% extends "layout.html" %}
 {% block content %}
     <h1 class="content-title">Selamat Datang!!!</h1>
-    <div class="home-message">
-        <h2>Tentang Situs QuizAli</h2>
-        <p>Ini adalah situs quiz sederhana yang dibuat untuk membantu kalian belajar tentang pengembangan AI menggunakan Python.</p>
-
-        <p>Untuk mulai Quiz, silakan pilih menu Take Quiz di atas, atau <a href="{{ url_for('quiz') }}">klik di sini.</a></p>
-
+    <div class="home-content">
+        <p>Ini adalah situs quiz sederhana yang dibuat untuk membantu kalian belajar tentang pengembangan AI menggunakan Python. Untuk mulai Quiz, silakan login lalu pilih menu Take Quiz, atau <a href="{{ url_for('quiz') }}">klik di sini.</a></p>
         <br>
-        <br>
+        <p>Jika kamu ingin mengetahui perkiraan 3 hari cuaca di kota kamu, gunakan fitur berikut.</p>
+        <form method="POST" action="{{ url_for('home') }}" class="search-city">
+            <input type="text" id="city" name="city" placeholder="Masukkan nama kota">
+            <button type="submit">Lihat</button>
+        </form>
 
-        <h2>Fitur Weather</h2>
-        <p>Jika kamu ingin mengetahui kondisi dan perkiraan cuaca di kota kamu, sila gunakan sidebar Weather.</p>
+        {% if error %}
+            <p>{{ error }}</p>
+        {% endif %}
+
+        <h3>Informasi Cuaca Kota {{ city }}</h3>
+
+        {% if list_cuaca %}
+            <table>
+                <tr>
+                    <th>Date</th>
+                    <th>Day</th>
+                    <th>Day Temp (°C)</th>
+                    <th>Night Temp (°C)</th>
+                </tr>
+                {% for day in list_cuaca %}
+                    <tr>
+                        <td>{{ day.date }}</td>
+                        <td>{{ day.day }}</td>
+                        <td>{{ day.temp_day }}</td>
+                        <td>{{ day.temp_night }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
     </div>
 {% endblock content %}

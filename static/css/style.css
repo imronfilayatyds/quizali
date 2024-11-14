@@ -1,10 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
-/* Reset some default styles */
-
-html, body {
-  height: 100%;
-}
 
 * {
   margin: 0;
@@ -13,15 +8,15 @@ html, body {
 }
 
 body {
-  font-family: "Barlow", sans-serif;
-  line-height: 1.6;
+  font-family: "Roboto", sans-serif;
+  line-height: 1.5;
 }
 
 /* Navbar */
 header {
   background-color: #ffffff;
   color: #000;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   display: flex;
@@ -34,14 +29,6 @@ nav {
   width: 100%;
   margin: 0 auto;
   padding: 1rem;
-}
-
-.navbar-fixed {
-  position: fixed;
-  z-index: 999;
-  background-color: rbga(255,255,255,0.7);
-  backdrop-filter: blur(5px);
-  box-shadow: inset 0 -1px 0 0 rgba(0,0,0,0.1);
 }
 
 .navbar-container {
@@ -156,31 +143,17 @@ nav {
 
 /* Main content layout */
 .content-container {
-  display: flex;
-  padding: 2rem;
-  flex: 1;
-  flex-direction: column; 
+  padding: 2rem; 
   margin-top: 3.5rem;
-  gap: 1rem;
+  min-height: calc(100vh - 3.5rem);
 }
 
 .main-content {
-  flex: 1;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 0.5rem;
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
   padding: 1rem;
   margin: 0;
-}
-
-.weather-widget {
-  height: fit-content;
-  margin-top: 1rem;
-  border: 1px solid rgba(0, 0, 0, 0.1); 
-  border-radius: 0.5rem;
-  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); 
-  padding: 1rem;
-  /* margin: 0; */
 }
 
 .content-title {
@@ -189,17 +162,49 @@ nav {
   margin-bottom: 20px;
 }
 
-.home-message {
-  width: 80%;
-  /* background-color: #fff4ea; */
-  padding: 20px;
+.home-content {
+  width: 90%;
   margin: 0 auto;
-  border-radius: 0.5rem;
 }
 
-.home-message a {
+.home-content a {
   text-decoration: none;
-  color: #7eacb5;
+  background-color: #efefef;
+  color: #4299e1;
+}
+
+.home-content h3 {
+  margin: 0.5rem auto;
+  text-align: center;
+}
+
+.home-content form.search-city {
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.home-content form.search-city input[type="text"] {
+  width: 200px;
+  /* color: #e2e8f0; */
+  border: 1px solid #e2e8f0;
+  border-radius: 0.375rem;
+  margin-right: 0.5rem;
+  padding-left: 0.5rem;
+  font-size: 1rem;
+}
+
+.home-content form.search-city button {
+  width: 80px;
+  padding: 0.75rem;
+  background-color: #4299e1; 
+  color: white;
+  border: none;
+  border-radius: 0.375rem;
+  cursor: pointer;
+  font-size: 1rem;
 }
 
 /* Footer */
@@ -210,6 +215,37 @@ footer {
   padding: 1rem;
   bottom: 0;
   width: 100%;
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+footer .social-media {
+  margin-top: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: row;
+}
+
+footer .social-media a {
+  width: 2.25rem; 
+  height: 2.25rem;  
+  margin-right: 0.75rem; 
+  border-radius: 50%; 
+  /* background-color: #fff; */
+  /* fill: currentColor; */
+  fill: #fff;
+  display: flex;  
+  justify-content: center;  
+  align-items: center; 
+  border: 1px solid #fff;
+}
+
+footer .social-media a:hover {
+  fill: currentColor;
+  background-color: #fff;
 }
 
 .mini-widget {
@@ -389,6 +425,33 @@ button.submit-quiz:hover {
   background-color: #0062cc;
 }
 
+/* Leaderboard */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  padding: 15px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;   
+}
+
+tr:hover {
+  background-color: #f5f5f5;
+}
+
 @media (min-width: 768px) {
   nav {
     padding: 0 1rem;
@@ -420,7 +483,7 @@ button.submit-quiz:hover {
   
   .content-container {
     flex-direction: row;
-    max-width: 90%; 
+    max-width: 80%; 
     margin-top: 4rem;
     margin-left: auto;
     margin-right: auto;
@@ -438,80 +501,9 @@ button.submit-quiz:hover {
   }
 }
 
-/* Leaderboard */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 20px;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-th, td {
-  padding: 15px;
-  text-align: center;
-  border-bottom: 1px solid #ddd;
-}
-
-th {
-  background-color: #f2f2f2;
-  font-weight: bold;
-}
-
-tr:nth-child(even) {
-  background-color: #f9f9f9;   
-}
-
-tr:hover {
-  background-color: #f5f5f5;
-}
 
 @media (min-width: 1024px) {
-  nav {
-    padding: 0 1rem;
-  }
-
-  .hamburger {
-    display: none;
-  }
-  .nav-menu {
-    display: block;
-    position: static;
-    background-color: transparent;
-    max-width: 100%;
-    box-shadow: none;
-    border-radius: 0;
-  }
-  
-  .nav-links {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .nav-links > li > a {
-    color: #1f2937;
-    padding: 0;
-    margin: 0 1rem;
-    text-decoration: none;
-  }
-  
   .content-container {
-    flex-direction: row;
-    max-width: 1200px; 
-    margin-top: 4rem;
-    margin-left: auto;
-    margin-right: auto;
+    max-width: 960px;
   }
-
-  .main-content {
-    flex: 3; 
-    margin-right: 1rem;
-  }
-
-  .weather-widget {
-    flex: 0 0 auto; 
-    margin-top: 0;
-    min-width: 275px; 
-  }
-
-
 }
