@@ -2,7 +2,7 @@
 {% block content %}
     <h1 class="content-title">Selamat Datang!!!</h1>
     <div class="home-content">
-        <p>Ini adalah situs quiz sederhana yang dibuat untuk membantu kalian belajar tentang pengembangan AI menggunakan Python. Untuk mulai Quiz, silakan login lalu pilih menu Take Quiz, atau <a href="{{ url_for('quiz') }}">klik di sini.</a></p>
+        <p>Ini adalah situs quiz sederhana yang dibuat untuk membantu kalian belajar tentang pengembangan AI menggunakan Python. Untuk mulai Quiz, silakan login lalu pilih menu Take Quiz.
         <br>
         <p>Jika kamu ingin mengetahui perkiraan 3 hari cuaca di kota kamu, gunakan fitur berikut.</p>
         <form method="POST" action="{{ url_for('home') }}" class="search-city">
@@ -11,10 +11,10 @@
         </form>
 
         {% if error %}
-            <p>{{ error }}</p>
+            <p class="error-msg-weather">{{ error }}</p>
+        {% else %}
+            <h3>Informasi Cuaca Kota {{ city }}</h3>
         {% endif %}
-
-        <h3>Informasi Cuaca Kota {{ city }}</h3>
 
         {% if list_cuaca %}
             <table>

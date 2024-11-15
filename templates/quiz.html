@@ -1,25 +1,27 @@
 {% extends "layout.html" %}
 {% block content %}
-  <h1 class="content-title">Take the Quiz</h1>
+  <h1 class="content-title">Take Quiz</h1>
+  <p class="total-score">Skor total Anda sejauh ini adalah: {{ total_score }}</p>
   <form method="POST" action="{{ url_for('quiz') }}">
       {% for question in questions %}
           <div class="question-block">
               <p>{{ question['question']|replace('\n', '<br>')|safe }}</p>
               <div class="answer-options-group">
+                  <p>{{ question['answer'] }}</p>
                   <div class="answer-option">
-                      <input type="radio" id="{{ question.index }}_0" name="{{ question.index }}" value="{{ question['choices'][0] }}" >
+                      <input type="radio" id="{{ question.index }}_0" name="{{ question.index }}" value="0">
                       <label for="{{ question.index }}_0">{{ question['choices'][0] }}</label>
                   </div>
                   <div class="answer-option">
-                      <input type="radio" id="{{ question.index }}_1" name="{{ question.index }}" value="{{ question['choices'][1] }}" >
+                      <input type="radio" id="{{ question.index }}_1" name="{{ question.index }}" value="1">
                       <label for="{{ question.index }}_1">{{ question['choices'][1] }}</label>
                   </div>
                   <div class="answer-option">
-                      <input type="radio" id="{{ question.index }}_2" name="{{ question.index }}" value="{{ question['choices'][2] }}" >
+                      <input type="radio" id="{{ question.index }}_2" name="{{ question.index }}" value="2">
                       <label for="{{ question.index }}_2">{{ question['choices'][2] }}</label>
                   </div>
                   <div class="answer-option">
-                      <input type="radio" id="{{ question.index }}_3" name="{{ question.index }}" value="{{ question['choices'][3] }}" >
+                      <input type="radio" id="{{ question.index }}_3" name="{{ question.index }}" value="3">
                       <label for="{{ question.index }}_3">{{ question['choices'][3] }}</label>
                   </div>
               </div>

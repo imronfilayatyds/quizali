@@ -9,19 +9,19 @@
                 <input type="text" id="username" name="username" required>
             </div>
             <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+                <label for="nickname">Nama Panggilan:</label>
+                <input type="text" id="nickname" name="nickname" required>
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
             </div>
             <div class="form-group">
-                <label for="confirm_password">Confirm Password:</label>
+                <label for="confirm_password">Konfirmasi Password:</label>
                 <input type="password" id="confirm_password" name="confirm_password" required>
             </div>
-            <button type="submit" class="btn">Create account</button>
-            <p class="after-button">Sudah punya account? <a href="{{ url_for('login') }}" class="link-after-button">Login di sini</a></p>
+            <button type="submit" class="btn">Buat account</button>
+            <p class="after-button">Sudah punya account? <a href="{{ url_for('login') }}">Login di sini</a></p>
         </form>
     </div>
 {% endblock content %}

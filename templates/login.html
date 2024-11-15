@@ -5,15 +5,15 @@
     <div class="form-wrapper">
         <form action="{{ url_for('login') }}" method="POST" class="form-ctr">
             <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required>
             </div>
             <button type="submit" class="btn">Login</button>
-            <p class="after-button">Belum punya account? <a href="{{ url_for('register') }}" class="link-after-button">Register di sini</a></p>
+            <p class="after-button">Belum punya account? <a href="{{ url_for('register') }}">Register di sini</a></p>
         </form>
     </div>
 {% endblock content %}
