@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 OPENWEATHERMAP_API_KEY = os.getenv('OPENWEATHERMAP_API_KEY')
 METEOBLUE_API_KEY = os.getenv('METEOBLUE_API_KEY')
-app.config['SECRET_KEY'] = 'SECRET_KEY'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///quizali.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
@@ -104,10 +104,8 @@ def quiz():
     total_score = 0
 
     if request.method == 'POST':
-        # Calculate score based on user responses
+        # Hitung skor
         user_answers = request.form.to_dict()
-        print('Ini data awal')
-        print(user_answers)
         score = 0
 
         # Load total_score dari db
@@ -115,17 +113,19 @@ def quiz():
         if last_result:
             total_score = last_result.total_score
 
-        # Load questions
-        with open('questions.json') as file:
-            questions = json.load(file)
+        # Load questions dengan urutan acak
+        randomized_questions = session.get('randomized_questions')
 
-        # Check each question's answer
+        if not randomized_questions:
+            flash('Tidak ada soal untuk dinilai. Mohon reload quiz.', 'error')
+            return redirect(url_for('quiz'))
+
+        # Check jawaban user based randomized order
         for question_index, user_answer in user_answers.items():
-            # question = questions[int(question_index)]
-            # correct_answer_index = question['answer']
+            question = randomized_questions[int(question_index)]
+            correct_answer_index = question['answer']
 
-            # if int(user_answer) == correct_answer_index:
-            if int(user_answer) == questions[int(question_index)]['answer']:
+            if int(user_answer) == correct_answer_index:
                 score += 1
 
         # Update total_score
@@ -137,20 +137,33 @@ def quiz():
         db.session.commit()
 
         flash(f'Skor Anda adalah {score}!', 'success')
+
+        session.pop('randomized_questions', None)
         return redirect(url_for('quiz'))
 
     else:
+        # Bersihkan questions sebelumnya di GET request yang baru
+        if 'randomized_questions' in session:
+            session.pop('randomized_questions', None)
+
         last_result = QuizResult.query.filter_by(user_id=user_id).order_by(QuizResult.timestamp.desc()).first()
         if last_result:
             total_score = last_result.total_score
-
-    # Load questions dan menambah index jawaban
-    with open('questions.json') as file:
-        questions = json.load(file)
-        randomized_questions = random.sample(questions, len(questions))
-        for i, question in enumerate(randomized_questions):
-            question['index'] = i 
-            question['choices_with_index'] = list(enumerate(question['choices']))
+    
+        questions_path = os.path.join(os.path.dirname(__file__), 'questions.json')
+        try:
+            with open(questions_path) as file:
+                questions = json.load(file)
+                randomized_questions = random.sample(questions, len(questions))
+                for i, question in enumerate(randomized_questions):
+                    question['index'] = i  
+                    question['choices_with_index'] = list(enumerate(question['choices']))
+        
+                # Store randomized questions ke session
+                session['randomized_questions'] = randomized_questions
+        except FileNotFoundError:
+            flash('Soal tidak ditemukan!', 'error')
+            return redirect(url_for('home'))
 
     return render_template("quiz.html", questions=randomized_questions, total_score=total_score, title="Quiz")
 

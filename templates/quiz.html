@@ -7,7 +7,6 @@
           <div class="question-block">
               <p>{{ question['question']|replace('\n', '<br>')|safe }}</p>
               <div class="answer-options-group">
-                  <p>{{ question['answer'] }}</p>
                   <div class="answer-option">
                       <input type="radio" id="{{ question.index }}_0" name="{{ question.index }}" value="0">
                       <label for="{{ question.index }}_0">{{ question['choices'][0] }}</label>
